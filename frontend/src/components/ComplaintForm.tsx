@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { VoiceInput } from './VoiceInput';
 import { ImageUpload } from './ImageUpload';
 import { analyzeIntake, generateGrievanceDraft, IntakeResult, GrievanceDraftResult } from '../api/mock';
-import { AlertCircle, CheckCircle2, ExternalLink, Send, ArrowRight, ShieldCheck, Sparkles } from 'lucide-react';
+import { AlertCircle, CheckCircle2, ExternalLink, Send, ShieldCheck, Sparkles } from 'lucide-react';
 
 export const ComplaintForm: React.FC = () => {
   const [lang, setLang] = useState<'ta' | 'en'>('ta');
@@ -257,12 +257,12 @@ export const ComplaintForm: React.FC = () => {
             {/* Target Authority Badge */}
             <div className="p-3 bg-blue-50 border border-blue-200 rounded-xl text-xs text-blue-900">
               <span className="font-bold">📍 Recommended Public Authority:</span>{' '}
-              {draftResult[selectedDraftLang].target_department}
+              {selectedDraftLang === 'tamil' ? draftResult.tamil_draft.target_department : draftResult.english_draft.target_department}
             </div>
 
             {/* Structured Complaint Body */}
             <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono whitespace-pre-wrap text-slate-800 leading-relaxed max-h-72 overflow-y-auto">
-              {draftResult[selectedDraftLang].body}
+              {selectedDraftLang === 'tamil' ? draftResult.tamil_draft.body : draftResult.english_draft.body}
             </div>
 
             {/* Action Handoff Buttons */}

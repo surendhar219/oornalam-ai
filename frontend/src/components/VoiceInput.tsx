@@ -20,6 +20,10 @@ export const VoiceInput: React.FC<VoiceInputProps> = ({ onTranscriptChange, lang
   }, []);
 
   const toggleRecording = () => {
+    if (!supported) {
+      alert("Speech recognition is not supported in this browser. Please use Google Chrome or Edge.");
+      return;
+    }
     const SpeechRecognition =
       (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
 

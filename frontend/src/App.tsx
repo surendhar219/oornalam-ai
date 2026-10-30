@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComplaintForm } from './components/ComplaintForm';
-import { Landmark, Users, CheckCircle, Code } from 'lucide-react';
+import { Landmark, Users } from 'lucide-react';
 
 export const App: React.FC = () => {
   return (
