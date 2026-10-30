@@ -1,0 +1,115 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "OoruNalam Canonical API Contracts",
+  "version": "1.0.0",
+  "description": "Standardized interface contract agreed by Byte Breakers at Hour 1 for decoupled frontend, backend, and AI service development.",
+  "categories": [
+    {
+      "id": "waste_accumulation",
+      "name_en": "Waste Accumulation & Garbage",
+      "name_ta": "குப்பை குவிதல் மற்றும் கழிவு மேலாண்மை",
+      "default_dept": "Solid Waste Management (SWM)"
+    },
+    {
+      "id": "road_damage",
+      "name_en": "Road Damage & Potholes",
+      "name_ta": "சாலை சேதம் மற்றும் குழிகள்",
+      "default_dept": "Bus Route Roads / Works Department"
+    },
+    {
+      "id": "waterlogging_drainage",
+      "name_en": "Drainage & Waterlogging",
+      "name_ta": "வடிகால் அடைப்பு மற்றும் தேங்கிய நீர்",
+      "default_dept": "Water Supply & Sewerage Board (CMWSSB)"
+    }
+  ],
+  "endpoints": {
+    "analyze_intake": {
+      "path": "/api/complaints/analyze",
+      "method": "POST",
+      "request": {
+        "text_content": "string (optional)",
+        "voice_transcript": "string (optional)",
+        "image_base64": "string (optional, base64 data url)",
+        "language_preference": "ta | en (default: ta)"
+      },
+      "response": {
+        "complaint_id": "string (uuid)",
+        "detected_category": "waste_accumulation | road_damage | waterlogging_drainage",
+        "category_confidence": "float (0.0 - 1.0)",
+        "visible_evidence": ["string"],
+        "extracted_details": {
+          "landmark": "string | null",
+          "ward": "string | null",
+          "duration": "string | null"
+        },
+        "follow_up_questions": [
+          {
+            "id": "locality_confirm",
+            "question_en": "Please confirm your locality landmark or ward number.",
+            "question_ta": "உங்கள் பகுதி அல்லது வார்டு எண்ணை உறுதிப்படுத்தவும்.",
+            "field": "locality"
+          },
+          {
+            "id": "duration_confirm",
+            "question_en": "How many days has this issue been persisting?",
+            "question_ta": "இந்த பிரச்சனை எத்தனை நாட்களாக நீடிக்கிறது?",
+            "field": "duration"
+          }
+        ]
+      }
+    },
+    "resolve_routing": {
+      "path": "/api/routing/resolve",
+      "method": "POST",
+      "request": {
+        "category": "string",
+        "city": "string",
+        "ward": "string",
+        "landmark": "string (optional)"
+      },
+      "response": {
+        "is_verified": "boolean",
+        "zone_name": "string",
+        "ward_number": "string",
+        "department_name_en": "string",
+        "department_name_ta": "string",
+        "official_portal_url": "string (url)",
+        "helpline_number": "string",
+        "confidence_score": "float",
+        "routing_notes": "string"
+      }
+    },
+    "generate_grievance": {
+      "path": "/api/complaints/generate-draft",
+      "method": "POST",
+      "request": {
+        "complaint_id": "string",
+        "confirmed_category": "string",
+        "confirmed_locality": "string",
+        "confirmed_duration": "string",
+        "citizen_name": "string (optional)",
+        "contact_number": "string (optional)"
+      },
+      "response": {
+        "complaint_id": "string",
+        "english_draft": {
+          "title": "string",
+          "subject": "string",
+          "body": "string",
+          "evidence_summary": "string",
+          "target_authority": "string"
+        },
+        "tamil_draft": {
+          "title": "string",
+          "subject": "string",
+          "body": "string",
+          "evidence_summary": "string",
+          "target_authority": "string"
+        },
+        "submission_portal_url": "string",
+        "instructions": "string"
+      }
+    }
+  }
+}

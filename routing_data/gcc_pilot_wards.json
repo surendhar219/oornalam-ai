@@ -1,0 +1,109 @@
+{
+  "pilot_city": "Chennai",
+  "corporation_name": "Greater Chennai Corporation (GCC)",
+  "official_helpline": "1913",
+  "verified_wards": [
+    {
+      "ward_number": "114",
+      "zone_number": "10",
+      "zone_name": "Kodambakkam",
+      "locality_names": ["T. Nagar", "Usman Road", "Pondy Bazaar", "Panagal Park"],
+      "departments": {
+        "waste_accumulation": {
+          "department_name_en": "Solid Waste Management (SWM) Dept, Zone 10",
+          "department_name_ta": "திடக்கழிவு மேலாண்மைத் துறை (மண்டலம் 10)",
+          "official_portal_url": "https://chennaicorporation.gov.in/gcc/citizen-portal/",
+          "helpline": "1913",
+          "sla_days": 1,
+          "source": "GCC Citizen Charter 2024"
+        },
+        "road_damage": {
+          "department_name_en": "Bus Route Roads / Works Dept, Zone 10",
+          "department_name_ta": "சாலைகள் மற்றும் பொதுப்பணித் துறை (மண்டலம் 10)",
+          "official_portal_url": "https://chennaicorporation.gov.in/gcc/citizen-portal/",
+          "helpline": "1913",
+          "sla_days": 3,
+          "source": "GCC Citizen Charter 2024"
+        },
+        "waterlogging_drainage": {
+          "department_name_en": "Chennai Metropolitan Water Supply & Sewerage Board (CMWSSB) Area 10",
+          "department_name_ta": "சென்னை பெருநகர குடிநீர் வழங்கல் மற்றும் கழிவுநீரகற்று வாரியம் (பகுதி 10)",
+          "official_portal_url": "https://cmwssb.tn.gov.in/online-grievance",
+          "helpline": "044-45674567 / 1916",
+          "sla_days": 2,
+          "source": "CMWSSB Area Directory"
+        }
+      }
+    },
+    {
+      "ward_number": "117",
+      "zone_number": "9",
+      "zone_name": "Teynampet",
+      "locality_names": ["Teynampet", "Alwarpet", "Eldams Road", "Poes Garden"],
+      "departments": {
+        "waste_accumulation": {
+          "department_name_en": "Solid Waste Management Dept, Zone 9",
+          "department_name_ta": "திடக்கழிவு மேலாண்மைத் துறை (மண்டலம் 9)",
+          "official_portal_url": "https://chennaicorporation.gov.in/gcc/citizen-portal/",
+          "helpline": "1913",
+          "sla_days": 1,
+          "source": "GCC Citizen Charter 2024"
+        },
+        "road_damage": {
+          "department_name_en": "Engineering & Road Works Dept, Zone 9",
+          "department_name_ta": "பொறியியல் மற்றும் சாலைப் பணிகள் துறை (மண்டலம் 9)",
+          "official_portal_url": "https://chennaicorporation.gov.in/gcc/citizen-portal/",
+          "helpline": "1913",
+          "sla_days": 3,
+          "source": "GCC Citizen Charter 2024"
+        },
+        "waterlogging_drainage": {
+          "department_name_en": "CMWSSB Area 9 (Teynampet)",
+          "department_name_ta": "CMWSSB பகுதி 9 (தேனாம்பேட்டை)",
+          "official_portal_url": "https://cmwssb.tn.gov.in/online-grievance",
+          "helpline": "1916",
+          "sla_days": 2,
+          "source": "CMWSSB Area Directory"
+        }
+      }
+    },
+    {
+      "ward_number": "173",
+      "zone_number": "13",
+      "zone_name": "Adyar",
+      "locality_names": ["Adyar", "Besant Nagar", "Kasturibai Nagar", "Indira Nagar"],
+      "departments": {
+        "waste_accumulation": {
+          "department_name_en": "Urbaser Sumeet / GCC SWM Dept, Zone 13",
+          "department_name_ta": "திடக்கழிவு மேலாண்மைத் துறை (மண்டலம் 13)",
+          "official_portal_url": "https://chennaicorporation.gov.in/gcc/citizen-portal/",
+          "helpline": "1913",
+          "sla_days": 1,
+          "source": "GCC Concessionaire Registry"
+        },
+        "road_damage": {
+          "department_name_en": "Works & Roads Dept, Zone 13",
+          "department_name_ta": "பணிகள் மற்றும் சாலைத் துறை (மண்டலம் 13)",
+          "official_portal_url": "https://chennaicorporation.gov.in/gcc/citizen-portal/",
+          "helpline": "1913",
+          "sla_days": 3,
+          "source": "GCC Citizen Charter 2024"
+        },
+        "waterlogging_drainage": {
+          "department_name_en": "CMWSSB Area 13 (Adyar)",
+          "department_name_ta": "CMWSSB பகுதி 13 (அடையாறு)",
+          "official_portal_url": "https://cmwssb.tn.gov.in/online-grievance",
+          "helpline": "1916",
+          "sla_days": 2,
+          "source": "CMWSSB Area Directory"
+        }
+      }
+    }
+  ],
+  "state_fallback": {
+    "official_portal_url": "https://cmhelpline.tnega.org/",
+    "helpline": "1100",
+    "name_en": "Tamil Nadu CM Helpline (Mudhalvarin Mugavari)",
+    "name_ta": "முதல்வரின் முகவரி உதவி மையம்"
+  }
+}
