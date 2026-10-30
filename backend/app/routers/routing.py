@@ -1,5 +1,5 @@
 """
-OoruNalam AI — Locality Routing REST Router
+OorNalam AI — Locality Routing REST Router
 Maintained by: SURENDHAR R (Backend & Database Developer)
 """
 

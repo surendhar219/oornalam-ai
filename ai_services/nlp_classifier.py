@@ -1,5 +1,5 @@
 """
-OoruNalam AI — Intent & Category Classifier
+OorNalam AI — Intent & Category Classifier
 Maintained by: SELVAGANAPATHI A (AI & NLP Developer)
 
 Classifies Tamil & English citizen complaints into the 3 MVP priority categories.

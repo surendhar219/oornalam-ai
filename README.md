@@ -1,4 +1,4 @@
-# OoruNalam AI (ஊருநலம்)
+# OorNalam AI (ஊர்நலம்)
 > **Multimodal AI-Powered Community Grievance Assistant**  
 > *“A Better Town Begins with Your Voice.”*
 
@@ -24,7 +24,7 @@
 ## 2. Monorepo Architecture
 
 ```
-oorunalam-ai/
+oornalam-ai/
 ├── frontend/             <-- SELVAGANAPATHI A (React, TypeScript, Tailwind)
 │   ├── src/
 │   │   ├── components/   (VoiceInput.tsx, ImageUpload.tsx, ComplaintForm.tsx)

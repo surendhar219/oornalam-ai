@@ -1,5 +1,5 @@
 """
-OoruNalam AI — Conversational Clarification & Follow-Up Engine
+OorNalam AI — Conversational Clarification & Follow-Up Engine
 Maintained by: SELVAGANAPATHI A (AI & NLP Developer)
 
 Identifies missing critical complaint dimensions (Locality, Duration, Severity)

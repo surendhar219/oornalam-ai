@@ -1,5 +1,5 @@
 """
-OoruNalam AI — Vision-Language Model (VLM) Client
+OorNalam AI — Vision-Language Model (VLM) Client
 Maintained by: TWIN KUMAR S (Vision AI & Multimodal Developer)
 
 Analyzes citizen-uploaded photographs strictly for visible physical evidence.

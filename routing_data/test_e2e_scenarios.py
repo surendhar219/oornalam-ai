@@ -1,5 +1,5 @@
 """
-E2E Integration & Verification Tests for OoruNalam Routing
+E2E Integration & Verification Tests for OorNalam Routing
 Lead & Author: SURIYAKUMARAN A (Routing, Testing & Lead)
 """
 

@@ -1,5 +1,5 @@
 """
-OoruNalam AI — Locality Routing Engine & Official Portal Registry
+OorNalam AI — Locality Routing Engine & Official Portal Registry
 Maintained by: SURIYAKUMARAN A (Team Leader & Routing Lead)
 
 Provides verified departmental routing for citizen grievances within verified

@@ -1,5 +1,5 @@
 """
-OoruNalam AI — Formal Bilingual Grievance Drafter
+OorNalam AI — Formal Bilingual Grievance Drafter
 Maintained by: SELVAGANAPATHI A (AI & NLP Developer)
 
 Generates official administrative petitions in English and Tamil
@@ -54,7 +54,7 @@ def draft_formal_grievance(
         f"This condition causes significant inconvenience and hygiene/safety hazards to pedestrians, commuters, and nearby residents. "
         f"I kindly request the department to inspect the site and initiate timely remediation.\n\n"
         f"Date of Report: {datetime.now().strftime('%Y-%m-%d')}\n"
-        f"Prepared via OoruNalam Civic Intelligence Assistant."
+        f"Prepared via OorNalam Civic Intelligence Assistant."
     )
     
     # Tamil Body
@@ -67,7 +67,7 @@ def draft_formal_grievance(
         f"இதனால் பொதுமக்கள், பள்ளி குழந்தைகள் மற்றும் வாகன ஓட்டிகள் பெரும் சிரமத்திற்கு ஆளாகின்றனர். "
         f"ஆகவே, பொது நலன் கருதி தாங்கள் உடனடியாக ஆய்வு செய்து உரிய நடவடிக்கை எடுக்குமாறு பணிவுடன் கேட்டுக்கொள்கிறேன்.\n\n"
         f"தேதி: {datetime.now().strftime('%Y-%m-%d')}\n"
-        f"ஊருநலம் (OoruNalam AI) செயலி மூலம் உருவாக்கப்பட்டது."
+        f"ஊர்நலம் (OorNalam AI) செயலி மூலம் உருவாக்கப்பட்டது."
     )
     
     return {

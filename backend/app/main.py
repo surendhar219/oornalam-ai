@@ -1,5 +1,5 @@
 """
-OoruNalam AI — FastAPI Application Entrypoint
+OorNalam AI — FastAPI Application Entrypoint
 Byte Breakers Software Division (Team ID: AARVAM-S-0004)
 Maintained by: SURENDHAR R (Backend & Database Developer)
 """
@@ -14,7 +14,7 @@ from backend.app.routers.routing import router as routing_router
 init_db()
 
 app = FastAPI(
-    title="OoruNalam AI Backend API",
+    title="OorNalam AI Backend API",
     description="Multimodal Community Grievance Intake, Intelligence, and Official Routing Engine",
     version="1.0.0"
 )
@@ -35,7 +35,7 @@ app.include_router(routing_router)
 @app.get("/")
 def root():
     return {
-        "project": "OoruNalam AI",
+        "project": "OorNalam AI",
         "team": "Byte Breakers",
         "team_id": "AARVAM-S-0004",
         "status": "online",

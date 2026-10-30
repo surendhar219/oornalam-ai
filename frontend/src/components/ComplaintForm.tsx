@@ -70,7 +70,7 @@ export const ComplaintForm: React.FC = () => {
         <div>
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-cyan-400"></span>
-            <h2 className="text-xl font-bold tracking-tight">OoruNalam AI Grievance Assistant</h2>
+            <h2 className="text-xl font-bold tracking-tight">OorNalam AI Grievance Assistant</h2>
           </div>
           <p className="text-xs text-slate-300 mt-1">
             {lang === 'ta'
@@ -300,7 +300,7 @@ export const ComplaintForm: React.FC = () => {
               <p className="text-xs text-slate-500 mt-1 max-w-md mx-auto">
                 {lang === 'ta'
                   ? 'உங்கள் புகார் அதிகாரப்பூர்வ அரசு இணையதளத்திற்கு அனுப்ப தயாராக உள்ளது. அரசு போர்ட்டலில் உள்நுழைந்து சமர்ப்பிக்கவும்.'
-                  : 'OoruNalam has prepared your formal grievance. Proceed to the official portal to complete filing.'}
+                  : 'OorNalam has prepared your formal grievance. Proceed to the official portal to complete filing.'}
               </p>
             </div>
 
@@ -330,7 +330,7 @@ export const ComplaintForm: React.FC = () => {
             </a>
 
             <div className="text-xs text-slate-400 italic">
-              * OoruNalam prepares and routes complaints; it does not bypass official citizen OTP/CAPTCHA verification.
+              * OorNalam prepares and routes complaints; it does not bypass official citizen OTP/CAPTCHA verification.
             </div>
           </div>
         )}

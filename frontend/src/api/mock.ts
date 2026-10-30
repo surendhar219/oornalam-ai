@@ -1,5 +1,5 @@
 /**
- * OoruNalam AI — API & Mock Client
+ * OorNalam AI — API & Mock Client
  * Maintained by: SELVAGANAPATHI A (Role A: Frontend Developer)
  * 
  * Allows frontend to run completely decoupled from backend using mock mode,
@@ -108,7 +108,7 @@ export async function generateGrievanceDraft(payload: {
         title: "Urgent Petition: Clearance of Uncollected Solid Waste Accumulation",
         target_department: "Greater Chennai Corporation (GCC) Solid Waste Management (SWM) Dept, Zone 10 (Kodambakkam)",
         evidence_summary: "Visible unsegregated domestic waste pile encroaching on road pavement",
-        body: `To:\nGreater Chennai Corporation (GCC) Zone 10 SWM Department\n\nRespected Officer,\n\nI am writing to report a serious civic issue at: ${payload.confirmed_locality}.\n\nObserved Evidence: Accumulation of unsegregated domestic & commercial solid waste.\nDuration: ${payload.confirmed_duration || "3 days"}.\n\nThis condition causes severe foul odor and pedestrian blockage. I kindly request immediate clearance.\n\nPrepared via OoruNalam Civic Intelligence Assistant.`
+        body: `To:\nGreater Chennai Corporation (GCC) Zone 10 SWM Department\n\nRespected Officer,\n\nI am writing to report a serious civic issue at: ${payload.confirmed_locality}.\n\nObserved Evidence: Accumulation of unsegregated domestic & commercial solid waste.\nDuration: ${payload.confirmed_duration || "3 days"}.\n\nThis condition causes severe foul odor and pedestrian blockage. I kindly request immediate clearance.\n\nPrepared via OorNalam Civic Intelligence Assistant.`
       },
       tamil_draft: {
         title: "அவசர மனு: தேங்கியுள்ள குப்பைகளை உடனடியாக அகற்றுதல் தொடர்பாக",

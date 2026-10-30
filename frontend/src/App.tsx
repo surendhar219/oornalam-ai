@@ -13,7 +13,7 @@ export const App: React.FC = () => {
               ஊ
             </div>
             <div>
-              <h1 className="text-lg font-bold text-slate-900 leading-tight">OoruNalam AI</h1>
+              <h1 className="text-lg font-bold text-slate-900 leading-tight">OorNalam AI</h1>
               <p className="text-xs text-slate-500">Multimodal Community Grievance Assistant</p>
             </div>
           </div>
@@ -42,7 +42,7 @@ export const App: React.FC = () => {
           </h2>
           <p className="text-sm text-slate-600 mt-2 max-w-xl mx-auto">
             Report waste accumulation, broken roads, or drainage issues using Tamil/English voice and photos. 
-            OoruNalam analyzes evidence, clarifies details, and guides you to the verified official portal.
+            OorNalam analyzes evidence, clarifies details, and guides you to the verified official portal.
           </p>
         </div>
 
@@ -53,7 +53,7 @@ export const App: React.FC = () => {
       <footer className="bg-slate-900 text-slate-400 text-xs py-6 border-t border-slate-800">
         <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-3 text-center sm:text-left">
           <div>
-            <p className="text-slate-300 font-medium">OoruNalam AI — Aarvam Cybernaut Hackathon 2026</p>
+            <p className="text-slate-300 font-medium">OorNalam AI — Aarvam Cybernaut Hackathon 2026</p>
             <p className="text-slate-500">Built by Byte Breakers: Suriyakumaran A, Selvaganapathi A, Harivignesh K, Twin Kumar S, Surendhar R</p>
           </div>
           <div className="flex gap-4">

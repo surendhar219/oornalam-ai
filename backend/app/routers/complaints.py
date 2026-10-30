@@ -1,5 +1,5 @@
 """
-OoruNalam AI — Complaints REST Router
+OorNalam AI — Complaints REST Router
 Maintained by: SURENDHAR R (Backend & Database Developer)
 """
 

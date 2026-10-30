@@ -1,5 +1,5 @@
 """
-OoruNalam AI — Pydantic Schemas & Data Contracts
+OorNalam AI — Pydantic Schemas & Data Contracts
 Maintained by: SURENDHAR R (Backend & Database Developer)
 """
 

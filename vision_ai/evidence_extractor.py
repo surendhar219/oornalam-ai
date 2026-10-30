@@ -1,5 +1,5 @@
 """
-OoruNalam AI — Multimodal Fusion & Discrepancy Detector
+OorNalam AI — Multimodal Fusion & Discrepancy Detector
 Maintained by: TWIN KUMAR S (Vision AI & Multimodal Developer)
 
 Fuses visual observations with text/speech inputs.

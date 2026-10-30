@@ -1,5 +1,5 @@
 """
-OoruNalam AI — SQLite Database Layer
+OorNalam AI — SQLite Database Layer
 Maintained by: SURENDHAR R (Backend & Database Developer)
 """
 
@@ -9,7 +9,7 @@ import json
 from datetime import datetime
 from typing import Optional, Dict, Any
 
-DB_FILE = os.path.join(os.path.dirname(__file__), "..", "..", "oorunalam.db")
+DB_FILE = os.path.join(os.path.dirname(__file__), "..", "..", "oornalam.db")
 
 def init_db():
     conn = sqlite3.connect(DB_FILE)
