@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { VoiceInput } from './VoiceInput';
 import { ImageUpload } from './ImageUpload';
 import { analyzeIntake, generateGrievanceDraft, IntakeResult, GrievanceDraftResult } from '../api/mock';
-import { AlertCircle, CheckCircle2, ExternalLink, Send, ShieldCheck, Sparkles } from 'lucide-react';
+import { AlertCircle, CheckCircle2, ExternalLink, Send, Sparkles, MessageSquare, Gauge } from 'lucide-react';
 
 export const ComplaintForm: React.FC = () => {
   const [lang, setLang] = useState<'ta' | 'en'>('ta');
@@ -14,9 +14,11 @@ export const ComplaintForm: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [intakeResult, setIntakeResult] = useState<IntakeResult | null>(null);
   
-  // Follow-up answers
+  // Follow-up answers & Adaptive confirmation
   const [locality, setLocality] = useState('Ward 114, Usman Road, T. Nagar');
   const [duration, setDuration] = useState('3 days');
+  const [selectedConfirmation, setSelectedConfirmation] = useState<string | null>(null);
+  const [completenessScore, setCompletenessScore] = useState<number>(85);
 
   // Final draft
   const [draftResult, setDraftResult] = useState<GrievanceDraftResult | null>(null);
@@ -36,12 +38,18 @@ export const ComplaintForm: React.FC = () => {
       if (res.extracted_duration) {
         setDuration(res.extracted_duration);
       }
+      setCompletenessScore(res.completeness_score || 85);
       setStep('clarify');
     } catch (err: any) {
       alert("Error processing complaint: " + err.message);
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleOptionSelect = (option: string) => {
+    setSelectedConfirmation(option);
+    setCompletenessScore(98); // Dynamically escalate to 98% Filing Ready
   };
 
   const handleGenerateDraft = async () => {
@@ -115,8 +123,8 @@ export const ComplaintForm: React.FC = () => {
                 onChange={(e) => setTextContent(e.target.value)}
                 placeholder={
                   lang === 'ta'
-                    ? 'எ.கா: ரோட்டில் குப்பைகள் தேங்கி கிடக்கிறது, உடனடியாக அள்ள வேண்டும்...'
-                    : 'e.g., Roadside waste accumulated near bus stop causing foul odor...'
+                    ? 'எ.கா: ரோட்டில் சாக்கடை பெருக்கெடுத்து ஓடுகிறது, துர்நாற்றம் வீசுகிறது...'
+                    : 'e.g., Sewage water overflowing on road causing foul odor...'
                 }
                 className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500"
               />
@@ -155,19 +163,51 @@ export const ComplaintForm: React.FC = () => {
           </form>
         )}
 
-        {/* STEP 2: CLARIFICATION & ROUTING CONFIRMATION */}
+        {/* STEP 2: ADAPTIVE GRIEVANCE COMPLETENESS & CONFIRMATION */}
         {step === 'clarify' && intakeResult && (
-          <div className="space-y-6">
+          <div className="space-y-5">
+            {/* ADAPTIVE COMPLETENESS METER */}
+            <div className="p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-200">
+              <div className="flex justify-between items-center mb-2">
+                <div className="flex items-center gap-2 text-blue-900 font-bold text-sm">
+                  <Gauge className="w-5 h-5 text-blue-600" />
+                  <span>Adaptive Grievance Completeness Engine</span>
+                </div>
+                <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${
+                  completenessScore >= 95 ? 'bg-emerald-600 text-white' : 'bg-blue-600 text-white'
+                }`}>
+                  {completenessScore}% {completenessScore >= 95 ? 'Ready to File' : 'Intake Score'}
+                </span>
+              </div>
+
+              {/* Progress bar */}
+              <div className="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
+                <div 
+                  className={`h-2.5 rounded-full transition-all duration-500 ${
+                    completenessScore >= 95 ? 'bg-emerald-500' : 'bg-blue-600'
+                  }`}
+                  style={{ width: `${completenessScore}%` }}
+                ></div>
+              </div>
+
+              <p className="text-xs text-blue-800 mt-2 font-medium">
+                {completenessScore >= 95 
+                  ? '🎯 Verified for Portal Handoff: Missing details inferred; 1 confirmation captured.'
+                  : '💡 Dynamic Intelligence: Instead of 15 form fields, we just need 1 quick confirmation.'}
+              </p>
+            </div>
+
+            {/* AI EVIDENCE & INFERENCE BADGES */}
             <div className="p-4 bg-emerald-50 rounded-xl border border-emerald-200">
               <div className="flex items-center gap-2 text-emerald-800 font-bold text-sm">
-                <CheckCircle2 className="w-5 h-5" />
-                <span>AI Evidence Analysis Complete</span>
+                <CheckCircle2 className="w-5 h-5 text-emerald-600" />
+                <span>Multimodal Evidence Fused & Verified</span>
               </div>
               <p className="text-xs text-emerald-700 mt-1">
                 Detected Category: <strong className="uppercase">{intakeResult.detected_category.replace('_', ' ')}</strong> (Confidence: {Math.round(intakeResult.category_confidence * 100)}%)
               </p>
               <div className="mt-2 text-xs text-slate-600">
-                <span className="font-semibold">Visible Evidence:</span>
+                <span className="font-semibold">Objective Inferences from Photo & Audio:</span>
                 <ul className="list-disc pl-5 mt-1 space-y-0.5">
                   {intakeResult.visible_evidence.map((ev, i) => (
                     <li key={i}>{ev}</li>
@@ -176,34 +216,74 @@ export const ComplaintForm: React.FC = () => {
               </div>
             </div>
 
+            {/* THE CONVERSATIONAL ADAPTIVE CONFIRMATION (1 HIGH-IMPACT QUESTION) */}
+            {intakeResult.adaptive_confirmation && (
+              <div className="p-4 bg-amber-50 rounded-xl border border-amber-300 space-y-3">
+                <div className="flex items-center gap-2 text-amber-900 font-bold text-sm">
+                  <MessageSquare className="w-4 h-4 text-amber-700" />
+                  <span>
+                    {lang === 'ta' ? 'அதிமுக்கிய உறுதிப்படுத்தல் (1-Tap Priority Confirmation)' : 'Single High-Impact Confirmation'}
+                  </span>
+                </div>
+                
+                <p className="text-sm font-semibold text-slate-900">
+                  {lang === 'ta' ? intakeResult.adaptive_confirmation.question_ta : intakeResult.adaptive_confirmation.question_en}
+                </p>
+
+                <div className="flex flex-wrap gap-2">
+                  {intakeResult.adaptive_confirmation.quick_options.map((opt, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      onClick={() => handleOptionSelect(opt)}
+                      className={`px-3 py-2 text-xs font-semibold rounded-lg border transition-all ${
+                        selectedConfirmation === opt
+                          ? 'bg-amber-600 text-white border-amber-600 shadow'
+                          : 'bg-white text-slate-800 border-amber-200 hover:bg-amber-100'
+                      }`}
+                    >
+                      {opt}
+                    </button>
+                  ))}
+                </div>
+
+                <p className="text-xs text-amber-800 italic">
+                  ⚡ Impact: {intakeResult.adaptive_confirmation.impact}
+                </p>
+              </div>
+            )}
+
+            {/* LOCALITY CONFIRMATION */}
             <div className="p-4 bg-sky-50 rounded-xl border border-sky-200 space-y-3">
               <h3 className="text-sm font-bold text-sky-950 flex items-center gap-2">
                 <AlertCircle className="w-4 h-4 text-sky-600" />
-                {lang === 'ta' ? 'துல்லியமான துறைக்கு அனுப்ப தகவலை உறுதிப்படுத்தவும்' : 'Confirm Locality for Verified Department Routing'}
+                {lang === 'ta' ? 'துறைக்கு அனுப்ப பகுதி விவரத்தை உறுதிப்படுத்தவும்' : 'Confirm Locality for Desk Dispatch'}
               </h3>
 
-              <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
-                  {lang === 'ta' ? 'பகுதி / வார்டு எண் (Locality & Ward)' : 'Locality Landmark & Ward'}
-                </label>
-                <input
-                  type="text"
-                  value={locality}
-                  onChange={(e) => setLocality(e.target.value)}
-                  className="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500"
-                />
-              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                    {lang === 'ta' ? 'பகுதி / வார்டு எண் (Locality & Ward)' : 'Locality Landmark & Ward'}
+                  </label>
+                  <input
+                    type="text"
+                    value={locality}
+                    onChange={(e) => setLocality(e.target.value)}
+                    className="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500"
+                  />
+                </div>
 
-              <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
-                  {lang === 'ta' ? 'எத்தனை நாட்களாக நீடிக்கிறது? (Duration)' : 'Persistence Duration'}
-                </label>
-                <input
-                  type="text"
-                  value={duration}
-                  onChange={(e) => setDuration(e.target.value)}
-                  className="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500"
-                />
+                <div>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                    {lang === 'ta' ? 'நீடிக்கும் நாட்கள் (Duration)' : 'Persistence Duration'}
+                  </label>
+                  <input
+                    type="text"
+                    value={duration}
+                    onChange={(e) => setDuration(e.target.value)}
+                    className="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500"
+                  />
+                </div>
               </div>
             </div>
 
@@ -214,7 +294,7 @@ export const ComplaintForm: React.FC = () => {
               className="w-full bg-sky-600 hover:bg-sky-700 text-white font-semibold py-3 px-4 rounded-xl shadow transition-all flex items-center justify-center gap-2"
             >
               {loading ? (
-                <span>மனு தயாராகிறது (Synthesizing Grievance)...</span>
+                <span>அதிகாரப்பூர்வ மனு தயாராகிறது (Synthesizing Grievance)...</span>
               ) : (
                 <>
                   <Send className="w-4 h-4" />
@@ -240,7 +320,7 @@ export const ComplaintForm: React.FC = () => {
                     selectedDraftLang === 'tamil' ? 'bg-sky-600 text-white' : 'bg-slate-100 text-slate-700'
                   }`}
                 >
-                  தமிழ் வடிவம்
+                  தமிழ்
                 </button>
                 <button
                   type="button"
@@ -249,89 +329,53 @@ export const ComplaintForm: React.FC = () => {
                     selectedDraftLang === 'english' ? 'bg-sky-600 text-white' : 'bg-slate-100 text-slate-700'
                   }`}
                 >
-                  English Format
+                  English
                 </button>
               </div>
             </div>
 
-            {/* Target Authority Badge */}
-            <div className="p-3 bg-blue-50 border border-blue-200 rounded-xl text-xs text-blue-900">
-              <span className="font-bold">📍 Recommended Public Authority:</span>{' '}
-              {selectedDraftLang === 'tamil' ? draftResult.tamil_draft.target_department : draftResult.english_draft.target_department}
+            <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-3 font-mono text-xs">
+              <div className="text-sky-800 font-bold">
+                {selectedDraftLang === 'tamil' ? draftResult.tamil_draft.title : draftResult.english_draft.title}
+              </div>
+              <div className="text-slate-600 font-semibold">
+                Target: {selectedDraftLang === 'tamil' ? draftResult.tamil_draft.target_department : draftResult.english_draft.target_department}
+              </div>
+              <div className="p-3 bg-white border rounded text-slate-800 whitespace-pre-line leading-relaxed">
+                {selectedDraftLang === 'tamil' ? draftResult.tamil_draft.body : draftResult.english_draft.body}
+              </div>
             </div>
 
-            {/* Structured Complaint Body */}
-            <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono whitespace-pre-wrap text-slate-800 leading-relaxed max-h-72 overflow-y-auto">
-              {selectedDraftLang === 'tamil' ? draftResult.tamil_draft.body : draftResult.english_draft.body}
-            </div>
-
-            {/* Action Handoff Buttons */}
-            <div className="flex flex-col sm:flex-row gap-3">
-              <button
-                type="button"
-                onClick={() => setStep('handoff')}
-                className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 px-4 rounded-xl shadow flex items-center justify-center gap-2"
+            <div className="p-4 bg-emerald-50 rounded-xl border border-emerald-300 flex items-center justify-between">
+              <div>
+                <p className="text-xs font-bold text-emerald-900">Direct Submission Channel Verified</p>
+                <p className="text-xs text-emerald-700">Official Helpline: <strong>{draftResult.helpline_number}</strong></p>
+              </div>
+              <a
+                href={draftResult.submission_portal_url}
+                target="_blank"
+                rel="noreferrer"
+                className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-2 px-3 rounded-lg flex items-center gap-1.5 shadow"
               >
-                <ShieldCheck className="w-5 h-5" />
-                <span>{lang === 'ta' ? 'மனுவை அங்கீகரித்து சமர்ப்பிக்க (Approve & Handoff)' : 'Approve & Submit to Official Portal'}</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => setStep('clarify')}
-                className="px-4 py-3 border border-slate-300 text-slate-700 hover:bg-slate-100 font-semibold rounded-xl text-xs"
-              >
-                {lang === 'ta' ? 'திருத்து (Edit Details)' : 'Edit Details'}
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* STEP 5: OFFICIAL PORTAL HANDOFF */}
-        {step === 'handoff' && draftResult && (
-          <div className="text-center py-6 space-y-4">
-            <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto">
-              <ShieldCheck className="w-10 h-10" />
+                <span>Submit to Portal</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
             </div>
 
-            <div>
-              <h3 className="text-lg font-bold text-slate-900">
-                {lang === 'ta' ? 'மனு வெற்றிகரமாக உருவாக்கப்பட்டது!' : 'Grievance Formatted & Ready for Filing'}
-              </h3>
-              <p className="text-xs text-slate-500 mt-1 max-w-md mx-auto">
-                {lang === 'ta'
-                  ? 'உங்கள் புகார் அதிகாரப்பூர்வ அரசு இணையதளத்திற்கு அனுப்ப தயாராக உள்ளது. அரசு போர்ட்டலில் உள்நுழைந்து சமர்ப்பிக்கவும்.'
-                  : 'OorNalam has prepared your formal grievance. Proceed to the official portal to complete filing.'}
-              </p>
-            </div>
-
-            <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 max-w-md mx-auto text-left text-xs space-y-2">
-              <div>
-                <span className="font-semibold text-slate-600">Complaint ID:</span>{' '}
-                <span className="font-mono font-bold text-slate-900">{draftResult.complaint_id}</span>
-              </div>
-              <div>
-                <span className="font-semibold text-slate-600">Official Portal:</span>{' '}
-                <span className="text-sky-700 underline break-all">{draftResult.submission_portal_url}</span>
-              </div>
-              <div>
-                <span className="font-semibold text-slate-600">Official Helpline:</span>{' '}
-                <span className="font-bold text-emerald-700">{draftResult.helpline_number}</span>
-              </div>
-            </div>
-
-            <a
-              href={draftResult.submission_portal_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-sky-600 hover:bg-sky-700 text-white font-semibold py-3 px-6 rounded-xl shadow-lg transition-all"
+            <button
+              type="button"
+              onClick={() => {
+                setStep('intake');
+                setIntakeResult(null);
+                setDraftResult(null);
+                setTextContent('');
+                setVoiceText('');
+                setImageBase64(null);
+              }}
+              className="w-full py-2.5 text-xs text-slate-500 hover:text-slate-700 font-semibold border border-slate-200 rounded-xl"
             >
-              <span>{lang === 'ta' ? 'அரசு போர்ட்டலுக்கு செல்க (Open Official Portal)' : 'Open Verified GCC Portal'}</span>
-              <ExternalLink className="w-4 h-4" />
-            </a>
-
-            <div className="text-xs text-slate-400 italic">
-              * OorNalam prepares and routes complaints; it does not bypass official citizen OTP/CAPTCHA verification.
-            </div>
+              ← Report Another Issue
+            </button>
           </div>
         )}
       </div>

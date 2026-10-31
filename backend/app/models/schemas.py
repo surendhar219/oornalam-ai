@@ -21,6 +21,24 @@ class IntakeResponse(BaseModel):
     follow_up_questions: List[Dict[str, str]]
     has_discrepancy: bool = False
     discrepancy_note: Optional[str] = None
+    completeness_score: Optional[int] = None
+    is_filing_ready: Optional[bool] = None
+    adaptive_confirmation: Optional[Dict[str, Any]] = None
+
+class CompletenessCheckRequest(BaseModel):
+    complaint_id: Optional[str] = None
+    voice_transcript: Optional[str] = None
+    text_content: Optional[str] = None
+    image_present: bool = False
+    target_department: str = "DEFAULT"
+    user_responses: Optional[Dict[str, Any]] = None
+
+class CompletenessCheckResponse(BaseModel):
+    completeness_score: int
+    is_filing_ready: bool
+    target_portal: str
+    user_experience_note: str
+    step_breakdown: Dict[str, Any]
 
 class ClarificationSubmitRequest(BaseModel):
     complaint_id: str
